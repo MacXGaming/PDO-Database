@@ -1,5 +1,4 @@
 <?php
-
 class DB {
     private static $_instance = null;
 
@@ -12,7 +11,7 @@ class DB {
     private function __construct() {
         try {
             $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
-            $this->_pdo->exec("set names utf8");
+            // $this->_pdo->exec("set names utf8");
         } catch(PDOException $e) {
             die($e->getMessage());
         }
@@ -70,6 +69,10 @@ class DB {
 
     public function count() {
         return $this->_count;
+    }
+
+    public function lastId(){
+        return $this->_pdo->lastInsertId();
     }
 
 }
